@@ -12,7 +12,6 @@ class UserDeviceAddSerializer(serializers.Serializer):
     connection_Date=serializers.CharField(max_length=55)
     wifi_name=serializers.CharField(max_length=55)
     wifi_password=serializers.CharField( max_length=255)
-    #device_water_level=serializers.FloatField()
     device_WaterLevel=serializers.CharField()
     device_Name=serializers.CharField(max_length=55)
 
