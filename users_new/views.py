@@ -109,7 +109,7 @@ class AuthViewSet(viewsets.GenericViewSet):
 def get_all(request,pk):
 
     cursor = connection.cursor()
-
+    print("şgdglkşl")
     try:
           cursor.execute("SELECT ud.device_Name,ds.* FROM users_new_customuser as u ,userDevices_userdevices as ud ,devicePlants_deviceplants as dp, deviceSlots_deviceslots as ds WHERE u.id= ud.user_id AND ud.id = dp.uDevice_ID_id AND dp.id = ds.devicePlants_ID_id AND u.id = %s",[pk])
 
