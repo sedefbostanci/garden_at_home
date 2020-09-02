@@ -10,7 +10,7 @@ from rest_framework import generics
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 User = get_user_model()
-# Create your views here.
+
 
 @api_view(['POST',])
 @permission_classes([AllowAny])
