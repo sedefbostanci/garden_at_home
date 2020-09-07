@@ -53,10 +53,26 @@ class UserDevicesAPIView(generics.ListAPIView):
             try:
                 user = User.objects.get(id=uid)
                 devices=UserDevices.objects.filter(user=user).all().values()
-                #a=devices.values("user_id","device_id","connection_Date","wifi_name","wifi_password","device_WaterLevel","device_Name")
+                
                 b=list(devices)
                 return JsonResponse(b,safe=False)
             except User.DoesNotExist:
                 return JsonResponse({'message': 'This user does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST',])
+@permission_classes([AllowAny])
+
+def update_WaterLevel(request,pk,recent_WaterLevel):
+
+    try:
+        userDevice = UserDevices.objects.get(pk=pk)
+        print(userDevice.device_WaterLevel)
+        userDevice.__setattr__("device_WaterLevel", recent_WaterLevel)
+        userDevice.save()
+        print(userDevice.device_WaterLevel)
+        return JsonResponse({'message': 'userDevice water level updated successfully!'},status=status.HTTP_200_OK)
+    except UserDevices.DoesNotExist:
+        return JsonResponse({'message': 'The userDevice does not exist'}, status=status.HTTP_404_NOT_FOUND)

@@ -114,8 +114,15 @@ def get_all(request,pk):
           cursor.execute("SELECT ud.device_Name,ds.* FROM users_new_customuser as u ,userDevices_userdevices as ud ,devicePlants_deviceplants as dp, deviceSlots_deviceslots as ds WHERE u.id= ud.user_id AND ud.id = dp.uDevice_ID_id AND dp.id = ds.devicePlants_ID_id AND u.id = %s",[pk])
 
           row = cursor.fetchall()
+          #json_data = []
 
+          #for obj in row:
+            #  json_data.append({"device_Name" : obj[0], "id" : obj[1],"devicePlants_ID" : obj[8], "remaining_Time" : obj[2],"starting_Date" : obj[3],"plant_Name" : obj[4],"avg_GrowTime" : obj[5],"plant_Description" : obj[6],"plant_Tips" : obj[9],"device_Info" : obj[7]})
+
+
+          #return JsonResponse(json_data,safe=False)
           return JsonResponse(row,safe=False)
+
     except Exception as e:
           cursor.close
           return Response({"it is not okey"}, status=status.HTTP_400_BAD_REQUEST)
