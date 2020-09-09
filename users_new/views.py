@@ -162,4 +162,5 @@ def get_statics(request,pk):
 
     except Exception as e:
           cursor.close
-          return Response({"it is not okey"}, status=status.HTTP_400_BAD_REQUEST)
+          cursor2.close
+          return Response({"There is no plant"}, status=status.HTTP_400_BAD_REQUEST)
