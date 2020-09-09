@@ -109,11 +109,12 @@ class AuthViewSet(viewsets.GenericViewSet):
 def get_all(request,pk):
 
     cursor = connection.cursor()
-    print("deneme")
+
     try:
           cursor.execute("SELECT ud.device_Name,ds.* FROM users_new_customuser as u ,userDevices_userdevices as ud ,devicePlants_deviceplants as dp, deviceSlots_deviceslots as ds WHERE u.id= ud.user_id AND ud.id = dp.uDevice_ID_id AND dp.id = ds.devicePlants_ID_id AND u.id = %s",[pk])
 
           row = cursor.fetchall()
+
           #json_data = []
 
           #for obj in row:
@@ -122,6 +123,42 @@ def get_all(request,pk):
 
           #return JsonResponse(json_data,safe=False)
           return JsonResponse(row,safe=False)
+
+    except Exception as e:
+          cursor.close
+          return Response({"it is not okey"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET',])
+@permission_classes([AllowAny])
+
+def get_statics(request,pk):
+
+    cursor = connection.cursor()
+    cursor2 = connection.cursor()
+    try:
+          cursor.execute("SELECT ds.* FROM users_new_customuser as u ,userDevices_userdevices as ud ,devicePlants_deviceplants as dp, deviceSlots_deviceslots as ds WHERE u.id= ud.user_id AND ud.id = dp.uDevice_ID_id AND dp.id = ds.devicePlants_ID_id AND u.id = %s",[pk])
+          cursor2.execute("SELECT plant_Name FROM users_new_customuser as u ,userDevices_userdevices as ud ,devicePlants_deviceplants as dp, deviceSlots_deviceslots as ds WHERE u.id= ud.user_id AND ud.id = dp.uDevice_ID_id AND dp.id = ds.devicePlants_ID_id AND u.id = %s ORDER BY ds.id DESC LIMIT 1",[pk])
+
+          row = cursor.fetchall()
+          row2= cursor2.fetchall()
+          plant_dict={}
+
+          for obj in row:
+
+              plant=obj[3]
+
+              if plant in plant_dict:
+                 plant_dict[plant]+=1
+              else:
+                 plant_dict[plant]=1
+
+          print(plant_dict)
+          print(row2[0][0])
+
+          plant_dict["last_added_plant"]=row2[0][0]
+          #return JsonResponse(json_data,safe=False)
+          return JsonResponse(plant_dict,safe=False)
 
     except Exception as e:
           cursor.close
