@@ -37,3 +37,9 @@ class UserDeviceAddSerializer(serializers.Serializer):
             return userDevice
         except Exception as e:
             print(e)
+
+
+class waterLevel(serializers.Serializer):
+
+    device_ID = serializers.CharField()
+    device_WaterLevel=serializers.CharField()

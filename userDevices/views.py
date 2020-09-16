@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from userDevices.models import UserDevices
-from .serializers import UserDeviceAddSerializer
+from .serializers import UserDeviceAddSerializer,waterLevel
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes
@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
+import json
 User = get_user_model()
 
 
@@ -103,8 +104,8 @@ def update_WaterLevel2(request):
 
 def update_WaterLevel3(request):
 
-    try:
-        print(request.POST)
-        return JsonResponse({'message': 'userDevice water level updated successfully!'},status=status.HTTP_200_OK)
-    except UserDevices.DoesNotExist:
-        return JsonResponse({'message': 'The userDevice does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    print("dgşfgkkşg")
+    x=json.loads(request.body)
+    print(x)
+
+    return JsonResponse({'message': 'successfully!'},status=status.HTTP_200_OK)

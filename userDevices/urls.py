@@ -9,6 +9,6 @@ urlpatterns = [
     path('get_userDevice/', UserDevicesAPIView.as_view(), name='userDevicesall'),
     url(r'^delete_userDevice/(?P<pk>[0-9]+)$',delete_userDevice, name='delete_device_user'),
     #url(r'^update_WaterLevel/(?P<pk>[0-9]+)/(?P<recent_WaterLevel>\d+\.\d+)$',update_WaterLevel, name='update_WaterLevel'),
-    #url(r'^update_WaterLevel/',update_WaterLevel2, name='update_WaterLevel'),
-    url(r'^update_WaterLevel/',update_WaterLevel3, name='update_WaterLevel'),
+    url(r'^update_WaterLevel/',update_WaterLevel2, name='update_WaterLevel'),
+    url(r'^update_WaterLevel3/',update_WaterLevel3, name='update_WaterLevel'),
 ]
