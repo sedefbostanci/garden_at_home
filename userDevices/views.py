@@ -96,3 +96,15 @@ def update_WaterLevel2(request):
         return JsonResponse({'message': 'userDevice water level updated successfully!'},status=status.HTTP_200_OK)
     except UserDevices.DoesNotExist:
         return JsonResponse({'message': 'The userDevice does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST',])
+@permission_classes([AllowAny])
+
+def update_WaterLevel3(request):
+
+    try:
+        print(request.POST)
+        return JsonResponse({'message': 'userDevice water level updated successfully!'},status=status.HTTP_200_OK)
+    except UserDevices.DoesNotExist:
+        return JsonResponse({'message': 'The userDevice does not exist'}, status=status.HTTP_404_NOT_FOUND)
