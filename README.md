@@ -4,7 +4,7 @@ Garden at home garden product allows you to grow vegetables and fruits anywhere 
 
 # App
 
-I worked on backend part of app. Frontend developed with Flutter. I created APIs with the Django Rest framework for to communicate with the frontend.
+I worked on backend part of app. Frontend developed with Flutter. APIs created with the Django Rest framework to communicate with the frontend.
 
 Here is our database diagram
 
